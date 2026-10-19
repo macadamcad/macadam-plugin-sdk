@@ -1,0 +1,14 @@
+{
+  "id": "com.macadam.examples.report",
+  "name": "Workshop Utilities",
+  "version": "1.0.0",
+  "apiVersion": "1",
+  "entry": "index.js",
+  "icon": "assets/icon.svg",
+  "capabilities": [
+    "command:run",
+    "document:read",
+    "parameters:write"
+  ],
+  "integrity": "sha256-80c3236f8f5f19df45a770e7a6dfca3dc93c5cb73b01faf4ca4e5ff8b3a1bb12"
+}

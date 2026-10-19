@@ -1,0 +1,13 @@
+{
+  "id": "com.macadam.examples.stock",
+  "name": "Parametric Stock",
+  "version": "1.0.0",
+  "apiVersion": "1",
+  "entry": "index.js",
+  "icon": "assets/icon.svg",
+  "capabilities": [
+    "feature:solid",
+    "kernel:build"
+  ],
+  "integrity": "sha256-b0d3a418b1d2eec3480671fae6539351139727a66bbb56e62b9a8172789b950e"
+}

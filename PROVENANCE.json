@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "snapshotDate": "2026-10-19",
+  "intendedPublicRepository": "https://github.com/macadamcad/macadam-plugin-sdk",
+  "license": "MIT; public release of these API declarations, documentation and examples authorized by the owner",
+  "scope": "Public plugin API documentation, declarations and sample packages only. No engine, relay, customer fixtures, credentials or private history.",
+  "compatibility": {
+    "shippingBrowserRevision": "9b02ab40176298e97382880b466b764e91713809",
+    "shippingRustComponentShortIdentifier": "b880",
+    "previewCoreRevision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+    "previewCoreStatus": "Unmerged and unshipped at snapshot; matching WASM/native/all-platform packaging unqualified"
+  },
+  "sourceRecords": [
+    {
+      "id": "shipping-declarations",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "web/plugin-api.ts",
+      "gitBlob": "34653da5fbe61775a1a49403127d90ef35223bf9",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-runtime-contract",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "web/plugin-runtime.js",
+      "gitBlob": "2b8af34924dec11afbf0238918e7e090fae2a1ce",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-package-files",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "web/plugin-files.ts",
+      "gitBlob": "ce106545c515665813a4f6943e29ff1a85ace596",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-browser-integration",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "web/plugins.ts",
+      "gitBlob": "0dc0dd34ad84a3f59c71cad2344ae68811bd6e60",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-native-activation",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Sources/JSAPI/PluginSession.swift",
+      "gitBlob": "f79b59f95e896750f3a3499f285a907de584d9c2",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-native-integration",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Apps/Shared/Editor/PluginManager.swift",
+      "gitBlob": "adace43ed6f2e68a5c17eb72183cdfb494ea45da",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-editor-api",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "web/jsapi-core.js",
+      "gitBlob": "e6ad1b14b1dcea1924fab7ad3379ddab588de408",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-editor-units",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "docs/JS_API.md",
+      "gitBlob": "0a65b9fd3be0b99d715f960b580ae59899f60f46",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-plugin-reference",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "docs/PLUGIN_API.md",
+      "gitBlob": "47e463bd8e56f3e4d609eea8bb4dbd32df4f1102",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-examples-reference",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/README.md",
+      "gitBlob": "42c289a16ce0913ca428abd2721536cfe81d2ae3",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "shipping-feature-validation",
+      "repository": "Macadam application source",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "rust/crates/engine/src/plugins.rs",
+      "gitBlob": "99e32740fa8c225a06c430dcead389095e4179d4",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "preview-declarations",
+      "repository": "Macadam application source",
+      "revision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+      "path": "rust/crates/cam/posts/grbl-linuxcnc/postprocessor-api.d.ts",
+      "gitBlob": "cfbf41df5781fcbf8991739d8af2fbeaa3d8671b",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "preview-registration",
+      "repository": "Macadam application source",
+      "revision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+      "path": "web/plugin-runtime.js",
+      "gitBlob": "f1592e68c56f0dd3ce96f6ab8b9edd125c2ca8a1",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "preview-post-example-entry",
+      "repository": "Macadam application source",
+      "revision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+      "path": "rust/crates/cam/posts/grbl-linuxcnc/index.js",
+      "gitBlob": "70928334e0b174eb7da3ce09cc5784c6d478a486",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "preview-post-example-manifest",
+      "repository": "Macadam application source",
+      "revision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+      "path": "rust/crates/cam/posts/grbl-linuxcnc/plugin.json",
+      "gitBlob": "effd8ef104e7f11833e1efdc4228613295002357",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "preview-post-example-data",
+      "repository": "Macadam application source",
+      "revision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+      "path": "rust/crates/cam/posts/grbl-linuxcnc/post.js",
+      "gitBlob": "7ef2d5ac3f6f27266d44279012495b261dca40cb",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "preview-event-contract",
+      "repository": "Macadam application source",
+      "revision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+      "path": "rust/crates/cam/src/post_events.rs",
+      "gitBlob": "24e96f6bb93a24e7b2aabb70ec071d6a2cd34e56",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "preview-export-contract",
+      "repository": "Macadam application source",
+      "revision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+      "path": "rust/crates/cam/src/post.rs",
+      "gitBlob": "1cdf56992274066b9572158accaf1ee1c2309b5e",
+      "scope": "Referenced for contract review only; implementation not copied"
+    },
+    {
+      "id": "preview-post-identity",
+      "repository": "Macadam application source",
+      "revision": "69b2514d5c7b569f68ec280e3d1855a7af5cf19b",
+      "path": "rust/crates/cam/src/post_profile.rs",
+      "gitBlob": "18cb33d581305c866bfc24e3fdab67d75f3d545e",
+      "scope": "Referenced for contract review only; implementation not copied"
+    }
+  ],
+  "outputs": [
+    {
+      "output": "types/local-plugin-api.d.ts",
+      "mode": "Exact implemented LocalPlugin* declaration excerpt with SDK header; general planned declarations and registration implementation excluded",
+      "sources": [
+        "shipping-declarations"
+      ]
+    },
+    {
+      "output": "preview/types/postprocessor-api.d.ts",
+      "mode": "Byte-identical MIT public type contract extraction",
+      "sources": [
+        "preview-declarations"
+      ]
+    },
+    {
+      "output": "samples/document-report/assets/icon.svg",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/document-report/assets/icon.svg",
+      "gitBlob": "33a1abc03e8d98412839136dc4ee572fb3dfa8fa"
+    },
+    {
+      "output": "samples/document-report/index.js",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/document-report/index.js",
+      "gitBlob": "5274bab73617fea3110e1e586e6e43f551fe75dd"
+    },
+    {
+      "output": "samples/document-report/lib/actions.js",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/document-report/lib/actions.js",
+      "gitBlob": "8ec08c97824cd6748893364704449ea2dc34cbe0"
+    },
+    {
+      "output": "samples/document-report/lib/format/counts.js",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/document-report/lib/format/counts.js",
+      "gitBlob": "cc46d6eabe8656c04f977a0a6f3e8040617bc3ae"
+    },
+    {
+      "output": "samples/document-report/lib/report.js",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/document-report/lib/report.js",
+      "gitBlob": "4a9f68f65e60f292db0b274c52b6be3bdf525cc6"
+    },
+    {
+      "output": "samples/document-report/plugin.json",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/document-report/plugin.json",
+      "gitBlob": "e903e4d7b8e30da70eb8fd2aafc4c9dddaa0ce95"
+    },
+    {
+      "output": "samples/parametric-stock/assets/icon.svg",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/parametric-stock/assets/icon.svg",
+      "gitBlob": "1f698a3f18d4fd365e98e2be4be92e08302aec40"
+    },
+    {
+      "output": "samples/parametric-stock/index.js",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/parametric-stock/index.js",
+      "gitBlob": "c9765273ece85a15406e060b4e05d036f6da662d"
+    },
+    {
+      "output": "samples/parametric-stock/plugin.json",
+      "mode": "byte-identical extraction",
+      "revision": "9b02ab40176298e97382880b466b764e91713809",
+      "path": "Examples/Plugins/parametric-stock/plugin.json",
+      "gitBlob": "da56905d9ee3a4a4e01ffd55842b65a173bbd387"
+    },
+    {
+      "output": "samples/hello-command/plugin.json",
+      "mode": "New sample authored against pinned contract",
+      "sources": [
+        "shipping-runtime-contract",
+        "shipping-declarations"
+      ]
+    },
+    {
+      "output": "samples/hello-command/index.js",
+      "mode": "New sample authored against pinned contract",
+      "sources": [
+        "shipping-runtime-contract",
+        "shipping-declarations"
+      ]
+    },
+    {
+      "output": "preview/samples/minimal-xyz-post/plugin.json",
+      "mode": "New bounded preview example, not runtime qualified",
+      "sources": [
+        "preview-registration",
+        "preview-post-example-manifest"
+      ]
+    },
+    {
+      "output": "preview/samples/minimal-xyz-post/index.js",
+      "mode": "New preview registration example",
+      "sources": [
+        "preview-declarations",
+        "preview-post-example-entry"
+      ]
+    },
+    {
+      "output": "preview/samples/minimal-xyz-post/post.js",
+      "mode": "New minimal metric straight-line data profile; no implementation extraction",
+      "sources": [
+        "preview-declarations",
+        "preview-event-contract",
+        "preview-export-contract",
+        "preview-post-identity"
+      ]
+    },
+    {
+      "output": "README.md",
+      "mode": "New public documentation",
+      "sources": [
+        "shipping-plugin-reference",
+        "shipping-examples-reference",
+        "shipping-declarations",
+        "preview-declarations"
+      ]
+    },
+    {
+      "output": "docs/getting-started.md",
+      "mode": "New public documentation",
+      "sources": [
+        "shipping-examples-reference",
+        "shipping-browser-integration",
+        "shipping-native-integration",
+        "shipping-editor-units"
+      ]
+    },
+    {
+      "output": "docs/api-reference.md",
+      "mode": "New public documentation",
+      "sources": [
+        "shipping-declarations",
+        "shipping-runtime-contract",
+        "shipping-package-files",
+        "shipping-browser-integration",
+        "shipping-native-activation",
+        "shipping-native-integration",
+        "shipping-editor-api",
+        "shipping-editor-units",
+        "shipping-feature-validation",
+        "shipping-plugin-reference",
+        "shipping-examples-reference"
+      ]
+    },
+    {
+      "output": "docs/compatibility.md",
+      "mode": "Coordinator-supplied release boundary plus source-defined implementation scope",
+      "sources": [
+        "shipping-plugin-reference",
+        "shipping-declarations",
+        "preview-declarations"
+      ]
+    },
+    {
+      "output": "preview/README.md",
+      "mode": "New preview documentation; release state and public revisions supplied by coordinator",
+      "sources": [
+        "preview-declarations",
+        "preview-registration",
+        "preview-event-contract",
+        "preview-export-contract",
+        "preview-post-identity"
+      ]
+    },
+    {
+      "output": "samples/hello-command/README.md",
+      "mode": "New sample documentation",
+      "sources": [
+        "shipping-runtime-contract"
+      ]
+    },
+    {
+      "output": "samples/document-report/README.md",
+      "mode": "New sample documentation",
+      "sources": [
+        "shipping-examples-reference",
+        "shipping-editor-units"
+      ]
+    },
+    {
+      "output": "samples/parametric-stock/README.md",
+      "mode": "New sample documentation",
+      "sources": [
+        "shipping-examples-reference",
+        "shipping-plugin-reference"
+      ]
+    },
+    {
+      "output": "LICENSE",
+      "mode": "Owner-authorized MIT license for this public SDK release; existing MIT declaration notice retained",
+      "sources": []
+    }
+  ],
+  "canonicalPublicPostprocessors": [
+    {
+      "repository": "https://github.com/macadamcad/post-grbl-linuxcnc",
+      "mainRevision": "809bc5bc739d87f6ee3458b265fec4e2c4e0a450",
+      "previouslyTestedSourceRevision": "f4da3941013fe88ff8b98142e4762214e381562c",
+      "provenance": "Public revision state supplied by coordinator; no independent content comparison performed by this extraction lane"
+    },
+    {
+      "repository": "https://github.com/macadamcad/post-reprapfirmware",
+      "mainRevision": "c3ec1f73edd625ff9805204a2cd3e1e7d0728986",
+      "previouslyTestedSourceRevision": "d953cedc002d3a3683fe8d4a8c7ad7543677a438",
+      "provenance": "Public revision state supplied by coordinator; no independent content comparison performed by this extraction lane"
+    }
+  ],
+  "verification": {
+    "kind": "Source-only contract and disclosure review",
+    "runtimeExecution": false,
+    "dependencyInstallation": false,
+    "newCIWorkflows": false,
+    "newThirdPartyDependencies": 0,
+    "notes": "No samples, application, Node runtime validation, builds, tests, CI, SSH or network checks executed for this publication packet."
+  }
+}
