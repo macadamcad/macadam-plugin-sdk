@@ -1,53 +1,74 @@
-# Getting started
+# Your first plugin
 
-## Install a command
+This creates a command that displays a greeting. It needs no document permissions and does not change the model.
 
-1. Download or clone this repository. Extract a ZIP download.
-2. Open a document in Macadam. Choose **Plugins → Install Folder…**. The web Console also exposes a Plugins button.
-3. Select `samples/hello-command`, containing `plugin.json` and `index.js`.
-4. Review the package permissions, install it, and run **Hello from a Plugin** from Plugins or the command palette.
+## 1. Create two text files
 
-The command displays `Hello from your Macadam plugin.` It does not need access to the document.
+Create a folder named `my-hello-plugin`. Place these files directly inside it:
 
-## Edit a package
+```text
+my-hello-plugin/
+  plugin.json
+  index.js
+```
 
-Edit `index.js` in your editor, then install the edited folder again. **Reload** reactivates the already installed snapshot; it does not reread your source folder. Packages are copied into local application/browser storage and do not sync with documents.
+`plugin.json`:
 
-The entry registers contributions synchronously:
+```json
+{
+  "id": "com.example.my-hello",
+  "name": "My Hello Plugin",
+  "version": "1.0.0",
+  "apiVersion": "1",
+  "entry": "index.js",
+  "capabilities": ["command:run"]
+}
+```
+
+Use your own stable reverse-DNS identifier when distributing a package. The `com.example` prefix is for examples; it does not require a network service or domain lookup.
+
+`index.js`:
 
 ```js
 function activate(host) {
+  if (host.apiVersion !== '1') throw new Error('This plugin needs package API 1');
   host.registerCommand({
     id: 'hello',
-    name: 'Hello from a Plugin',
+    name: 'Say Hello',
     run() {
-      return { type: 'message', text: 'Hello from your Macadam plugin.' };
+      return { type: 'message', text: 'Hello from my first Macadam plugin.' };
     },
   });
 }
 ```
 
-No runtime import is needed. For editor completion, add a JSDoc annotation referencing [the declarations](../types/local-plugin-api.d.ts):
+JavaScript is loaded as a script, not an ES module. Register synchronously. Do not add `export`, an asynchronous `activate`, a `Promise` result, an npm import or a call to `macadam`.
 
-```js
-/** @param {import('../../types/local-plugin-api').LocalPluginHost} host */
-function activate(host) {
-  // Register commands or declarative solid features here.
-}
-```
+## 2. Install the folder
 
-That relative type path applies to `samples/<name>/index.js` in this repository. Adjust it if you move the source. Type declarations are optional authoring aids; Macadam installs JavaScript.
+1. Open Macadam and open or create a document.
+2. Open the **Settings** inspector and find **Plugins**. In the native Mac app, the **Plugins** menu also provides **Install Folder…**.
+3. Choose **Install Folder…** and select `my-hello-plugin`, the folder that directly contains `plugin.json`.
+4. Review the package name and permissions, then choose **Install**.
 
-## Read a document and edit a parameter
+Choose the folder, not `index.js` or the parent of the folder. If you downloaded a ZIP, extract it first. Folder selection in a browser depends on that browser's directory-picker support.
 
-Install `samples/document-report`. **Document Report** reads a copied feature/parameter snapshot. **Set 2 mm Machining Allowance** creates or updates `stockAllowance` through a host action, as one normal undo entry. Its action uses `value: 0.002` because command length values use metres.
+## 3. Run the command
 
-## Add a solid template
+Open the command palette with **⌘Enter** on Mac or **Ctrl+Enter** on Windows/Linux, search for **Say Hello**, then run it. The installed package also has a command button in Plugins settings. The native Mac app lists package commands in the Plugins menu.
 
-Install `samples/parametric-stock` and choose **Add Oversize Stock**. Its ordinary inspector exposes four length expressions. Defaults produce 104 × 64 × 22 mm. After running the allowance command, set **Allowance per side** to `stockAllowance` to link the examples.
+Expected result: the app displays `Hello from my first Macadam plugin.` The model and undo history should not change. The palette contribution has the stable command ID `plugin.com.example.my-hello.command.hello`.
 
-Template fields contain expressions, not precomputed JavaScript geometry. Macadam evaluates the registered native primitive recipe. Undo/redo and document persistence use the normal feature path. Keep the matching plugin package available on every machine that evaluates that document.
+## 4. Edit and update
 
-Uninstalling a package preserves its document feature and parameter intent; the unavailable feature remains visible. Reinstall the required package version to restore evaluation.
+Change the greeting, save `index.js`, then choose **Install Folder…** again and select the same folder. Reusing the package ID replaces the installed package. **Reload** reactivates the already copied files; it does not reread your development folder.
 
-For multi-file CommonJS packages, integrity rules, permissions and limits, see the [API reference](api-reference.md). For postprocessors, use the separately marked [preview](../preview/README.md).
+For command-only development you can reinstall the same version. For a released package, increment `version`. Feature packages need additional care: saved feature nodes require an exact package version. Read [migration](compatibility.md) before changing a geometry package.
+
+## 5. Add only the permissions you need
+
+To inspect a document summary, add `document:read`. To return a literal parameter edit, also add `parameters:write`. For editable primitive geometry, use `feature:solid` plus `kernel:build` and follow [feature authoring](feature-authoring.md).
+
+There is no supported package API for selecting a face, running an Extrude command, creating a panel, downloading a file or issuing a toolpath. See the [capability matrix](capabilities.md) before expanding this example.
+
+If the package does not install, consult [troubleshooting](troubleshooting.md). Before sharing it, work through the [conformance checklist](conformance-checklist.md).

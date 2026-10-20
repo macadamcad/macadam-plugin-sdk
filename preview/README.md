@@ -1,6 +1,6 @@
 # Postprocessor API 2 preview
 
-**Not supported in shipping browser `9b02ab40176298e97382880b466b764e91713809`.** Core integration is pinned to unmerged source `69b2514d5c7b569f68ec280e3d1855a7af5cf19b`. Matching browser WASM, native integration and all-platform packaging are not qualified by this SDK. Do not follow the API 1 installation guide expecting these packages to work in that release.
+**Unshipped preview, not supported in the reference shipping API 1 browser (`6058b429cf76544752374a7253036ba5187b665b`).** Matching browser WASM, native integration and all-platform packaging are not qualified by this SDK. Do not follow the API 1 installation guide expecting these packages to work in that release. Start with the [authoring walkthrough](authoring-walkthrough.md) only when your target host explicitly advertises preview postprocessor support.
 
 The canonical public packages are:
 
@@ -9,7 +9,7 @@ The canonical public packages are:
 | [GRBL / LinuxCNC](https://github.com/macadamcad/post-grbl-linuxcnc) | [`809bc5bc739d87f6ee3458b265fec4e2c4e0a450`](https://github.com/macadamcad/post-grbl-linuxcnc/tree/809bc5bc739d87f6ee3458b265fec4e2c4e0a450) |
 | [RepRapFirmware](https://github.com/macadamcad/post-reprapfirmware) | [`c3ec1f73edd625ff9805204a2cd3e1e7d0728986`](https://github.com/macadamcad/post-reprapfirmware/tree/c3ec1f73edd625ff9805204a2cd3e1e7d0728986) |
 
-Those public revision references were supplied by the release coordinator. The declarations here were extracted from the pinned core source, not independently compared with those public trees. [PROVENANCE.json](../PROVENANCE.json) records both facts.
+The public packages provide maintained controller-specific examples. Their public availability is separate from host integration and machine qualification. The declaration and local example in this SDK received source review; this update did not execute a post or compare every public controller repository file. [PROVENANCE.json](../PROVENANCE.json) records the review scope.
 
 ## Authoring contract
 
