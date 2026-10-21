@@ -7,7 +7,7 @@ Start with the package name/version listed in Plugins, the exact folder selected
 | `plugin.json is missing or invalid JSON` | Wrong selected folder, filename or malformed JSON | Choose the folder that directly contains the manifest; remove comments/trailing commas from JSON |
 | `id must be reverse DNS` | Invalid package ID | Use `com.example.my-plugin`; local command/feature IDs have a different grammar |
 | `unsupported API version` | Wrong type/value/protocol | Package manifest must use string `"1"` |
-| `unknown or duplicate capability` | Requested permission not in the closed API 1 set | Remove duplicates; `cam:postprocess` requires an unshipped preview host |
+| `unknown or duplicate capability` | Requested permission not in the closed API 1 set | Remove duplicates; `cam:postprocess` and `document:author` require the documented staging preview |
 | `unsupported field ...` | Extra manifest/definition/template fields | Use only the documented schema; `dependencies`, arbitrary permissions and custom builder keys are not accepted |
 | `entry must name an included JavaScript file` | Wrong path/case/extension | Include the `.js` entry under the exact manifest path |
 | Folder exceeds 64 files / 4 MiB | Wrong folder or oversized package | Remove generated files, binaries, node_modules and irrelevant documents from the distribution folder |
@@ -43,6 +43,19 @@ If a browser cannot select folders, check that browser's directory-selection sup
 Check units first: command length values are **metres**; feature expressions should include units such as `'20mm'`. Counts are unitless, not length expressions. `cube.radius` is a circumradius, not its side length. The torus has tube and ring radii. `anchor: 'base'` and `'center'` position different points.
 
 Confirm exact dimension keys, valid positive dimensions and expression resolution. Inspect the actual rendered/evaluated result; successful registration alone proves no geometry dimensions. The reference host can fall back to zero on invalid placement/rotation expressions, so malformed displacement input can look like an unexplained origin placement.
+
+## Staging authoring failures
+
+| Failure | Correction |
+| --- | --- |
+| `parameter step requires parameters:write` | Add the capability and reinstall; author grants alone do not authorize parameter creation. |
+| `parameter ... already exists` | Use fresh names or an empty document; parameter steps are create-only. |
+| `... no feature factory` | A palette command is not necessarily authorable; use only published factory schemas. |
+| `... not an active reflected field` | Match the documented variant's schema; UI labels are not necessarily keys. |
+| `unknown/forward local feature` or scope refusal | Put producers first; use local keys and container paths, not document UUIDs. |
+| `Document changed while the plugin planned its authoring action` | Rerun against the current document; the browser did not apply the stale program. |
+
+See [the complete example and discovery limits](authoring.md). Native parity is unqualified.
 
 ## Report a host/API gap
 

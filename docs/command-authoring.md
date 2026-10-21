@@ -69,6 +69,6 @@ For portable packages, start with `icon: 'plugin'`, no shortcut, and `actsOn: 'n
 - Return a message for an expected unmet precondition. Throw an `Error` for an invalid package/program condition. Do not catch a failure and return a fake success.
 - Never return a `Promise`, schedule a document edit, wait for a network request, or assume timers will be serviced. There is no asynchronous command protocol.
 - Browser execution has a 3-second watchdog covering activation plus execution. It terminates the Worker and applies no returned action on timeout. This is an availability limit, not a geometry correctness check. The native implementation has no equivalent counted execution budget; keep native computations bounded too.
-- A command returns **one** action. A multi-parameter transaction, progress report plus edit, user prompt or explicit cancellation/rollback sequence needs a new host API.
+- A command returns **one** action. Production has no action-array transaction. The [staging author action](authoring.md) can create multiple parameters/features as one transaction; it does not add prompts, async work or progress callbacks.
 
 Use the app's Undo for a successfully applied parameter edit. Package installation, reloading and uninstallation are application state, not undoable document edits.

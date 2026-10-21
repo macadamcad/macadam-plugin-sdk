@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "snapshotDate": "2026-10-20",
   "publicRepository": "https://github.com/macadamcad/macadam-plugin-sdk",
-  "publicBaseRevision": "fe1774d5af185888fe00d77a9f34467fb1f2aac1",
+  "publicBaseRevision": "a54831a834b8845d0f5098fb9381e168bcb83a0f",
   "license": "MIT; documentation, public API declarations and public examples only",
   "reviewScope": {
     "kind": "Source review of the implemented public registration, package, command, feature and host-integration contracts",
@@ -12,25 +12,46 @@
     "sampleExecution": false,
     "buildOrCIExecution": false,
     "newDependencies": 0,
-    "nativeBinaryQualification": false
+    "nativeBinaryQualification": false,
+    "previewContractRevision": "f372c6ad290018d1e9a59926d80588b5e1e5bb96",
+    "stagingBrowserRevision": "886836a1dbf2704ffbbff8e10ba8393f3f5ba556"
   },
   "compatibility": {
     "localPackageProtocol": "1",
-    "implementedContributions": ["commands", "declarative solid primitive templates"],
+    "implementedContributions": [
+      "commands",
+      "declarative solid primitive templates"
+    ],
     "postprocessorDefinitionProtocol": "2",
-    "postprocessorStatus": "Unshipped preview; not accepted by the reference API 1 host"
+    "postprocessorStatus": "Staging preview only; absent from production reference; native binary/controller qualification open",
+    "previewContributions": [
+      "document authoring programs",
+      "declarative postprocessor registration (definition API 1 and API 2)"
+    ]
   },
   "content": {
-    "existingPublicExamples": ["hello-command", "document-report", "parametric-stock"],
-    "newExamples": ["parametric-spacer", "machining-allowance"],
-    "newExampleStatus": "Authored against the reviewed shipping contract; not executed",
+    "existingPublicExamples": [
+      "hello-command",
+      "document-report",
+      "parametric-stock"
+    ],
+    "newExamples": [
+      "author-plate"
+    ],
+    "newExampleStatus": "Corrected standalone polygon/extrusion package; source review only, not executed",
     "previewExampleStatus": "Preserved public source-only preview; not controller or runtime qualification",
     "privateImplementationDistributed": false,
     "credentialsOrCustomerModelsDistributed": false
   },
   "publicPostprocessors": [
-    { "repository": "https://github.com/macadamcad/post-grbl-linuxcnc", "referenceRevision": "809bc5bc739d87f6ee3458b265fec4e2c4e0a450" },
-    { "repository": "https://github.com/macadamcad/post-reprapfirmware", "referenceRevision": "c3ec1f73edd625ff9805204a2cd3e1e7d0728986" }
+    {
+      "repository": "https://github.com/macadamcad/post-grbl-linuxcnc",
+      "referenceRevision": "809bc5bc739d87f6ee3458b265fec4e2c4e0a450"
+    },
+    {
+      "repository": "https://github.com/macadamcad/post-reprapfirmware",
+      "referenceRevision": "c3ec1f73edd625ff9805204a2cd3e1e7d0728986"
+    }
   ],
-  "notes": "Public guides stand alone. Review evidence and implementation source locations are maintained separately; they are not required to write or install an API 1 package. This update does not extend the host API."
+  "notes": "Production reference remains 6058b429. Preview source contract f372c6ad is present in staging 886836a1. General geometry builders and complete public command/schema discovery are unavailable. This SDK update does not extend the running host."
 }

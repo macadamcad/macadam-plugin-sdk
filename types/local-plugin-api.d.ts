@@ -1,8 +1,15 @@
 // MIT — Copyright (c) 2026 Macadam contributors. See LICENSE.
-// Public local package API 1. Declarations/editor assistance only; the app supplies the runtime.
+// Public local package API 1 plus STAGING PREVIEW additions at f372c6ad.
+// document:author, cam:postprocess, author actions and post registration are absent
+// from production reference 6058b429. See docs/compatibility.md before installing.
+// Editor assistance only; the app supplies the runtime.
+// The general typed builder/evaluator contract (KernelBuilder, defineFeature, typed selection
+// refs, EvaluateContext) exists in the engine source marked PLANNED and is deliberately excluded
+// here — it is not a shipping capability.
 
 export type LocalCapability =
-  | 'command:run' | 'document:read' | 'parameters:write' | 'feature:solid' | 'kernel:build';
+  | 'command:run' | 'document:read' | 'parameters:write' | 'feature:solid' | 'kernel:build'
+  | 'cam:postprocess' | 'document:author';
 
 export interface LocalPluginManifest {
   /** Stable reverse-DNS ID, e.g. com.example.stock. Reinstalling the same ID replaces the package. */
@@ -49,11 +56,43 @@ export interface PluginCommandContext {
   readonly document?: DocumentSummary;
 }
 
+/**
+ * An authoring reference points at the result of an earlier step of the same author program.
+ * It preserves exact native feature identity and scope — plugin code never invents raw IDs.
+ */
+export interface LocalAuthoringReference { readonly $feature: string }
+// Local keys: lowercase first ASCII character, then letters/digits/_/-, at most 64 bytes.
+// path contains earlier local container keys, never existing-document UUIDs.
+// Only sketch steps currently expose a typed profile source for profile selections.
+
+export type PluginAuthoringStep =
+  | { readonly op: 'parameter'; readonly name: string;
+      readonly kind: 'length' | 'angle' | 'scalar';
+      /** Create-only; requires parameters:write. Existing names reject the program. SI units. */
+      readonly value: number }
+  | { readonly op: 'sketch'; readonly key: string; readonly name: string;
+      readonly plane: 'xy' | 'xz' | 'yz'; readonly path?: readonly string[] }
+  | { readonly op: 'feature'; readonly key: string; readonly name: string;
+      /** Existing shared registry command with an ordinary feature factory. */
+      readonly command: string;
+      /** Reflected field keys. Selection values use LocalAuthoringReference, never raw topology IDs. */
+      readonly fields: Readonly<Record<string, string | number | boolean | LocalAuthoringReference | readonly LocalAuthoringReference[]>>;
+      readonly path?: readonly string[] };
+
+// PREVIEW limits: 256 KiB encoded JSON; nonblank label <=160 bytes; 1..256 steps.
+export interface PluginAuthoringProgram {
+  readonly version: '1';
+  readonly label: string;
+  readonly steps: readonly PluginAuthoringStep[];
+}
+
 /** Exactly one synchronous, JSON-serializable action. No Promise, action array or arbitrary host call. */
 export type PluginAction =
   | { readonly type: 'message'; readonly text: string }
   | { readonly type: 'setParameter'; readonly name: string;
-      readonly kind: 'length' | 'angle' | 'scalar'; readonly value: number };
+      readonly kind: 'length' | 'angle' | 'scalar'; readonly value: number }
+  /** Requires BOTH document:author and kernel:build. Applied as one undoable host change. */
+  | { readonly type: 'author'; readonly program: PluginAuthoringProgram };
 
 export interface LocalPluginCommand {
   readonly id: string;
@@ -74,33 +113,74 @@ export interface NumericPluginParameter {
   readonly default: string;
 }
 
-export interface PrimitivePlacement {
+export type PrimitiveTemplate = {
   readonly dx: string; readonly dy: string; readonly dz: string;
   readonly rx?: string; readonly ry?: string; readonly rz?: string;
-  readonly anchor?: 'center' | 'base';
-}
-
-/** Exact required dimension maps. Expressions are strings; ${id} inserts a stored local parameter expression. */
-export type PrimitiveTemplate = PrimitivePlacement & (
-  | { readonly kind: 'box'; readonly dims: { readonly width: string; readonly depth: string; readonly height: string } }
-  | { readonly kind: 'sphere' | 'cube'; readonly dims: { readonly radius: string } }
-  | { readonly kind: 'cylinder' | 'cone'; readonly dims: { readonly radius: string; readonly height: string } }
-  | { readonly kind: 'frustum'; readonly dims: { readonly radius: string; readonly topRadius: string; readonly height: string } }
-  | { readonly kind: 'torus'; readonly dims: { readonly radius: string; readonly ringRadius: string } }
-  | { readonly kind: 'prism' | 'pyramid'; readonly dims: { readonly radius: string; readonly height: string; readonly sides: string } }
-  | { readonly kind: 'uvSphere'; readonly dims: { readonly radius: string; readonly sides: string; readonly rings: string } }
-  | { readonly kind: 'icosphere' | 'geodesic' | 'cubeSphere' | 'octasphere' | 'tetrasphere';
-      readonly dims: { readonly radius: string; readonly frequency: string } }
-);
+  readonly anchor?: string;
+  readonly kind: string;
+  readonly dims: Readonly<Record<string, string>>;
+};
 
 export interface LocalPluginFeature {
   readonly id: string;
   readonly name: string;
   readonly surface: 'solid';
   readonly params: Readonly<Record<string, NumericPluginParameter>>;
+  /** The native primitive body encoding; ${parameter} expands to the stored expression. */
   readonly template: { readonly primitive: PrimitiveTemplate };
   /** Deliberately unavailable: the host rejects JavaScript geometry callbacks. */
   readonly evaluate?: never;
+}
+
+// ── Postprocessors (cam:postprocess) ──────────────────────────────────────────────────────────────
+
+export type PostToken = { readonly text: string } | {
+  readonly value: 'workOffset' | 'toolSlot' | 'rpm' | 'rotaryAngle';
+  readonly precision: 'integer' | 'coordinate';
+};
+export type PostBlocks = readonly (readonly PostToken[])[];
+
+export interface PostProfile {
+  readonly units: 'mm';
+  readonly axes: 'xyz-indexed-a';
+  readonly arcs: 'xy-incremental';
+  readonly comment: 'parentheses' | 'semicolon';
+  readonly headerLabel: string;
+  readonly motion: { readonly rapid: string; readonly linear: string; readonly cwArc: string; readonly ccwArc: string };
+  readonly requireMappedTool: boolean;
+  readonly programStart: PostBlocks;
+  readonly toolChange: PostBlocks;
+  readonly spindleStart: PostBlocks;
+  readonly spindleStop: PostBlocks;
+  readonly rotaryIndex: PostBlocks;
+  readonly programEnd: PostBlocks;
+}
+
+/** Legacy profile shape (the post's own apiVersion '1'). */
+export interface LegacyLocalPostProcessor {
+  readonly id: string;
+  readonly name: string;
+  readonly apiVersion: '1';
+  readonly extension: string;
+  readonly mime: 'text/plain';
+  readonly aliases?: readonly string[];
+  readonly profile: PostProfile;
+}
+
+/**
+ * STAGING PREVIEW event profile (post apiVersion 2). The full MIT contract is
+ * in ./local-post-event-profile.d.ts. This type does not provide an export call.
+ */
+export type LocalPostProcessor = LegacyLocalPostProcessor | EventLocalPostProcessor;
+
+export interface EventLocalPostProcessor {
+  readonly id: string;
+  readonly name: string;
+  readonly apiVersion: '2';
+  readonly extension: string;
+  readonly mime: 'text/plain';
+  readonly aliases?: readonly string[];
+  readonly profile: import('./local-post-event-profile').PostEventProfile;
 }
 
 /** The complete package API 1 host, not the broader editor scripting object. */
@@ -108,6 +188,13 @@ export interface LocalPluginHost {
   readonly apiVersion: '1';
   registerCommand(command: LocalPluginCommand): void;
   registerFeature(feature: LocalPluginFeature): void;
+  /** STAGING PREVIEW only; requires cam:postprocess. */
+  registerPostProcessor(post: LocalPostProcessor): void;
 }
+
+// Event and export shapes are documentation, not new callable host methods.
+export type { PostValue, PostEventToken, PostEventBlocks, PostEventProfile,
+  PostProgramEvent, PostOperationSettings, PostExportConfiguration, Postprocessor,
+  PostprocessorHost } from './local-post-event-profile';
 
 export type ActivatePlugin = (host: LocalPluginHost) => void;

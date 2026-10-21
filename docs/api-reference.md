@@ -1,6 +1,6 @@
 # Local package API 1 reference
 
-This page lists the entire supported plugin call surface. [TypeScript declarations](../types/local-plugin-api.d.ts) describe the data shapes; the guides explain how to use them. Types are documentation/editor assistance, not a runtime or an extra library to import.
+This page lists the production reference call surface and explicitly marked staging preview additions. [TypeScript declarations](../types/local-plugin-api.d.ts) describe the data shapes; the guides explain how to use them. Types are documentation/editor assistance, not a runtime or an extra library to import.
 
 ## Entry point
 
@@ -15,6 +15,7 @@ The entry script may define `activate`, assign `module.exports = activate`, or a
 | `host.apiVersion` | String `'1'` | Read-only protocol identifier |
 | `host.registerCommand(command)` | `void` | `command:run`; activation must still be open |
 | `host.registerFeature(feature)` | `void` | Both `feature:solid` and `kernel:build`; activation must still be open |
+| `host.registerPostProcessor(post)` | `void` | **Staging preview:** `cam:postprocess`; activation must still be open; [postprocessor contract](postprocessors.md) |
 
 Registration errors throw JavaScript `Error`s. A failed registration prevents installation. There is no `onDeactivate`, async activation, evaluator registration, subscription, file API or `host.macadam` property.
 
@@ -65,13 +66,16 @@ Parameters are sorted by name. Numeric values use canonical **metres**, **radian
 type PluginAction =
   | { type: 'message'; text: string }
   | { type: 'setParameter'; name: string;
-      kind: 'length' | 'angle' | 'scalar'; value: number };
+      kind: 'length' | 'angle' | 'scalar'; value: number }
+  // STAGING PREVIEW only:
+  | { type: 'author'; program: PluginAuthoringProgram };
 ```
 
 | Action | Checks | Effect |
 | --- | --- | --- |
 | `message` | String `text`, maximum 8192 JavaScript string code units | Displays transient app text; no document edit |
 | `setParameter` | `parameters:write`; nonblank name; one of the three kinds above; finite numeric `value` | Host creates or changes a named literal parameter through normal document commands/undo |
+| `author` | **Staging preview:** `document:author` + `kernel:build`; each parameter step also `parameters:write` | Ordered create-only parameters/sketches/ordinary factory features in one Undo entry; [full program, limits and sample fields](authoring.md) |
 
 `setParameter` cannot write a boolean, set a formula, delete a parameter, edit an arbitrary feature or target a parameter by UUID. A formula-defined destination rejects this literal write. A supplied name is a document name, not scoped plugin storage. Use a distinctive name and inspect existing parameters before replacing a value.
 

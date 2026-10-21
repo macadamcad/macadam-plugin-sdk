@@ -44,7 +44,16 @@ Each invocation starts with a new activation and copied current summary, then ru
 - A thrown error, rejected result or browser timeout applies no command action.
 - Once a valid numeric edit is applied, use document **Undo**. There is no plugin cancel handle or progress/cancellation callback.
 - Native code does not provide the browser's execution timeout. Do not use a slow loop as a cancellable task.
-- No action-array transaction or multi-step rollback API exists. Return one action and let the host own its document command.
+- No action-array transaction or plugin rollback callback exists. The [staging author action](authoring.md) is a distinct single-result transaction for creating parameters/features; it is not available in the production reference.
+
+## Staging preview lifecycle
+
+Read the [release matrix](compatibility.md) before installing an author/post package. Source integration
+is present in the preview browser/native code, but native binary parity and packaging are unqualified.
+Browser authoring checks document JSON, boundary generation and package identity before applying its
+single Undo entry. This check is not asserted for the native runner. Author-created ordinary records
+are distinct from plugin-template nodes and do not need a JavaScript evaluator during replay.
+Bundled `com.macadam.posts.*` packages are host-owned; user packages cannot replace or uninstall them.
 
 ## Feature creation and undo
 

@@ -29,15 +29,20 @@ A package is a local folder of UTF-8 text. It is installed by selecting the fold
 
 The version validator checks this syntax, not the complete Semantic Versioning specification or ordering. The installer does not choose a newer release, prevent a downgrade, verify a publisher or contact a registry. A package with the same ID replaces the locally installed package after validation. Unknown top-level manifest fields are rejected by native registration; do not add arbitrary `permissions`, `dependencies`, `url`, `minimumAppVersion` or `settings` fields.
 
-Only these five API 1 capabilities exist:
+The production reference accepts these five API 1 capabilities:
 
 | Capability | Host use |
 | --- | --- |
 | `command:run` | Register/invoke commands |
 | `document:read` | Include the copied summary in command context |
-| `parameters:write` | Accept a command's numeric `setParameter` action |
+| `parameters:write` | Accept a command's numeric `setParameter` action; also required by preview author parameter steps |
 | `feature:solid` | Register a solid definition; requires `kernel:build` too |
 | `kernel:build` | Permit that native solid template; requires `feature:solid` too |
+
+The staging preview adds `document:author` (author programs) and `cam:postprocess` (post registration).
+`kernel:build` also authorizes author programs in combination with `document:author`; parameter steps
+additionally require `parameters:write`. Neither new capability is accepted by the production reference.
+See [compatibility](compatibility.md), [authoring](authoring.md) and [postprocessors](postprocessors.md).
 
 These names are not general OAuth scopes or operating-system permissions. [Security](security.md) separates the checks from the remaining trust requirements.
 

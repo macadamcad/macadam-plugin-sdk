@@ -1,6 +1,6 @@
 # Postprocessor API 2 preview
 
-**Unshipped preview, not supported in the reference shipping API 1 browser (`6058b429cf76544752374a7253036ba5187b665b`).** Matching browser WASM, native integration and all-platform packaging are not qualified by this SDK. Do not follow the API 1 installation guide expecting these packages to work in that release. Start with the [authoring walkthrough](authoring-walkthrough.md) only when your target host explicitly advertises preview postprocessor support.
+**Staging preview, absent from production reference `6058b429cf76544752374a7253036ba5187b665b`.** The contract is implemented at `f372c6ad290018d1e9a59926d80588b5e1e5bb96` and present in staging browser `886836a1dbf2704ffbbff8e10ba8393f3f5ba556`; see the [release matrix](../docs/compatibility.md) and [postprocessor guide](../docs/postprocessors.md). This source review does not qualify sample execution, native binaries or all-platform packaging. Do not follow the API 1 installation guide expecting these packages to work in that release. Start with the [authoring walkthrough](authoring-walkthrough.md) only when your target host explicitly advertises preview postprocessor support.
 
 The canonical public packages are:
 

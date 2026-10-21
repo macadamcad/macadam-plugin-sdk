@@ -1,6 +1,6 @@
 # What a plugin can do
 
-API 1 has two contribution types: synchronous commands and declarative solid templates. Permissions allow specific host interactions; they do not expose private application modules.
+The production reference API 1 has two contribution types: synchronous commands and declarative solid templates. Permissions allow specific host interactions; they do not expose private application modules.
 
 | Goal | API 1 support | Interface and limit |
 | --- | --- | --- |
@@ -24,9 +24,22 @@ API 1 has two contribution types: synchronous commands and declarative solid tem
 | Add a controller postprocessor | Preview only | [API 2](../preview/README.md), not accepted by the shipping API 1 host |
 | Store persistent plugin state or run background jobs | No | Fresh activation per invocation; no settings/storage/event-loop API |
 
+## Staging preview additions
+
+The preceding production table does not apply to the added preview surface. At the exact preview
+revisions in [compatibility](compatibility.md), commands may return an [author program](authoring.md)
+with `document:author` + `kernel:build` (and `parameters:write` for parameter steps), and packages may
+register [postprocessors](postprocessors.md) with `cam:postprocess`. This adds a third registration
+method, `host.registerPostProcessor(post)`, without changing `host.apiVersion` from `'1'`.
+
+The authoring example creates an editable sketch, polygon and extrusion. It is not arbitrary palette
+command dispatch: ordinary factories and supported typed selections are required. Complete public
+command/field discovery is still missing; the authoring page explicitly lists the example's fields.
+CAM planning, geometry callbacks, live topology access and async work remain unavailable.
+
 ## Exactly which internal API can a package access?
 
-None directly. Macadam exposes this narrow public registration object:
+None directly. The production reference exposes this narrow registration object (the staging preview adds the post method described above):
 
 ```ts
 interface LocalPluginHost {
@@ -36,7 +49,7 @@ interface LocalPluginHost {
 }
 ```
 
-During a command, Macadam passes a frozen plain-data context. The only supported path from a command back into the document is its single returned action. `kernel:build` is the permission to register a native primitive template; it is **not** a JavaScript kernel handle.
+During a command, Macadam passes a frozen plain-data context. The only supported path from a command back into the document is its single returned action. `kernel:build` authorizes a native primitive template and, with `document:author`, a staging author program; it is **not** a JavaScript kernel handle.
 
 Names such as `macadam.doc`, `macadam.bodies`, `engine`, `window.macadam` or an editor scripting API may appear in other Macadam material. They belong to other execution contexts and are not part of `activate(host)` or `run(context)`. Do not import application files or use undocumented globals to reach them.
 

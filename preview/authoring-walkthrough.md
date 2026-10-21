@@ -1,6 +1,6 @@
 # Write a declarative CAM postprocessor — preview only
 
-**This cannot be installed in the reference shipping API 1 host.** It is a complete authoring guide for the published API 2 preview contract, not a statement that matching app/WASM/native integration is released. Check that your target host explicitly supports `cam:postprocess` and `registerPostProcessor` before proceeding.
+**This requires the documented staging preview; production reference 6058b429 does not accept it.** See the [release matrix](../docs/compatibility.md) and [postprocessor guide](../docs/postprocessors.md). It is a complete authoring guide for the published API 2 preview contract, not a statement that matching app/WASM/native integration is released. Check that your target host explicitly supports `cam:postprocess` and `registerPostProcessor` before proceeding.
 
 ## What the post can and cannot do
 
@@ -19,7 +19,7 @@ minimal-xyz-post/
   post.js
 ```
 
-The manifest uses package `apiVersion: '1'` and requests `capabilities: ['cam:postprocess']`. This is an additional preview host permission, not a shipping permission. The entry loads package-local data and calls:
+The manifest uses package `apiVersion: '1'` and requests `capabilities: ['cam:postprocess']`. This permission is accepted by the listed staging preview, absent from the production reference. The entry loads package-local data and calls:
 
 ```js
 const post = require('./post.js');

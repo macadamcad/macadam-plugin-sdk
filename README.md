@@ -1,8 +1,8 @@
 # Macadam Plugin SDK
 
-Write a local JavaScript package that adds commands or editable parametric solids to [Macadam](https://macadamcad.com). This repository contains the complete **shipping local package API 1** contract, examples and authoring guides. You do not need access to Macadam's application source or a second geometry engine.
+Write a local JavaScript package that adds commands or editable parametric solids to [Macadam](https://macadamcad.com). This repository documents the **production local package API 1** contract plus explicitly labelled **staging previews**, examples and authoring guides. You do not need access to Macadam's application source or a second geometry engine.
 
-**The current plugin API is deliberately small.** Your entry receives a registration host with two methods: `registerCommand` and `registerFeature`. A command can read a limited document summary and return a message or one numeric parameter change. A feature is a declarative template for one supported solid primitive. Plugins do **not** receive the application's `macadam` object, live geometry, selection, a kernel, arbitrary panels, or general modelling commands. See [what you can build](docs/capabilities.md) before choosing this API.
+**The production plugin API is deliberately small.** Your entry receives a registration host with two methods: `registerCommand` and `registerFeature`. A command can read a limited document summary and return a message or one numeric parameter change. A feature is a declarative template for one supported solid primitive. Plugins do **not** receive the application's `macadam` object, live geometry, selection, a kernel, arbitrary panels, or general modelling commands. See [what you can build](docs/capabilities.md) and the [release matrix](docs/compatibility.md) before choosing this API. The staging preview adds document authoring and a third registration method for CAM postprocessors; neither addition is in the production reference.
 
 ## Start here
 
@@ -18,8 +18,8 @@ Write a local JavaScript package that adds commands or editable parametric solid
 | Interface | Availability |
 | --- | --- |
 | Package API 1, commands and primitive feature templates | Documented shipping browser contract; reference snapshot `6058b429cf76544752374a7253036ba5187b665b`. The reviewed Mac host implements the same package contract; see [platform limits](docs/platforms-and-lifecycle.md). |
-| Postprocessor definition API 2 | **Unshipped preview.** Kept under [preview/](preview/README.md); requires a host that explicitly supports it. |
-| Arbitrary geometry callbacks, sketches, booleans, CAM operations, panels, files or networking | **Not exposed to API 1 packages.** Broader editor scripting is a different execution surface. |
+| Document authoring and postprocessor definitions API 1/2 | **Staging preview**, contract `f372c6ad`, present in staging `886836a1`; absent from production `6058b429`. Read [authoring](docs/authoring.md), [postprocessors](docs/postprocessors.md), and [release matrix](docs/compatibility.md). |
+| Arbitrary geometry callbacks, CAM planning, panels, files or networking | **Unavailable.** Preview authoring can create sketches and ordinary features through the specific data-program contract; it does not expose a geometry callback. |
 
 `apiVersion` is a protocol identifier, not the application version. Installing a package that requests more permissions does not enable an unimplemented API.
 
@@ -34,6 +34,8 @@ Install an individual example folder using **Settings → Plugins → Install Fo
 | [parametric-stock](samples/parametric-stock) | Expression-preserving feature template | Editable oversize box |
 | [parametric-spacer](samples/parametric-spacer) | Geometry, units, placement and rotation | Editable cylinder; no implicit hole or boolean |
 | [machining-allowance](samples/machining-allowance) | Safe, CAM-adjacent parameter workflow | Validated allowance/report commands; **no toolpath creation** |
+
+| [author-plate](samples/author-plate) | **Staging preview** author transaction, local references and scope | Editable polygon and extrusion; one Undo entry |
 
 These examples received source review for this documentation update. **They were not executed as part of this update.** Follow the [conformance checklist](docs/conformance-checklist.md) on your target app release before distributing a plugin.
 

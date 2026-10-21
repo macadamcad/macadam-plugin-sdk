@@ -21,6 +21,16 @@
 
 `actsOn`, the package's display name, a custom icon and the claimed version are **metadata**, not security grants. A claimed `kernel:build` permission does not provide arbitrary native execution. A snapshot feature ID does not allow mutation by ID.
 
+## Staging preview grants
+
+`document:author` plus `kernel:build` permits one author transaction; parameter steps additionally
+require `parameters:write` and cannot replace existing names. The host validates all steps and native
+references. The browser rejects an author action when document content/boundary generation or package
+registration changed during execution. This is not a verified native stale-document guarantee.
+`cam:postprocess` permits serializable profile registration, not CAM planning, callback-per-move
+execution, arbitrary output files or a machine connection. These grants exist only in the explicitly
+listed [staging preview](compatibility.md); the production reference fails closed on them.
+
 ## Realm restrictions
 
 The browser uses a disposable Worker. The reviewed Mac implementation uses fresh JavaScriptCore contexts and does not endow them with a native filesystem, document or kernel bridge. Supported communication is plain copied data and the registration/result protocol.

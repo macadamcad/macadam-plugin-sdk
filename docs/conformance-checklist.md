@@ -33,6 +33,15 @@ This is a manual acceptance checklist for plugin authors. The documentation upda
 - [ ] Uninstall or a version mismatch reports unavailable feature data without deleting the saved parameter data. Reinstalling the correct version restores its definition.
 - [ ] Package upgrade behaviour and the absence of automatic saved-node migration are documented for users.
 
+## Staging authoring additions
+
+- [ ] Package states the exact compatible preview host; production rejects its added permissions.
+- [ ] `parameters:write` is requested if any parameter step is returned; existing names do not get overwritten.
+- [ ] Command IDs, active field keys, expression units, local references and container paths match published schemas.
+- [ ] The real model appears; native dependencies update it; one Undo removes the complete action and Redo restores it.
+- [ ] Browser stale-document/package replacement protection is checked separately from native parity.
+- [ ] Source review and any runtime sample results are reported separately; a better count without geometry is not success.
+
 ## Distribution and security
 
 - [ ] README states target app/platform versions and unsupported capabilities honestly; source review, sample execution and controller qualification are reported separately.

@@ -1,0 +1,14 @@
+{
+  "id": "com.example.author-plate",
+  "name": "Author Plate Example",
+  "version": "1.0.0",
+  "apiVersion": "1",
+  "entry": "index.js",
+  "capabilities": [
+    "command:run",
+    "document:read",
+    "document:author",
+    "kernel:build",
+    "parameters:write"
+  ]
+}
